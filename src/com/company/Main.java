@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class Main {
+    private static int ticketNumber = 0;
+    private static String namelist2 = ("");
 
     public static void main(String[] args) throws IOException {
         menu();
@@ -32,7 +34,7 @@ public class Main {
                         break;
                 }
             }
-            }catch (Exception e) {
+        }catch (Exception e) {
             System.out.println("Error in main menu method");
         }
     }
@@ -44,12 +46,18 @@ public class Main {
         System.out.println("Please enter your name");
         String name = (Reader.readLine());
 
+        List<String> userName = new ArrayList<>();
+        Collections.addAll(userName,"");
+        userName.add(name);
+
         List<String> nameList = new ArrayList<>();
         Collections.addAll(nameList, "Tyler", "John", "Lucas");
+        nameList.add(generateName());
+        System.out.println(nameList);
 
-        if (name.equalsIgnoreCase("Tyler") || name.equalsIgnoreCase("John") || name.equalsIgnoreCase("Lucas")) {
+        if (userName.get(0).equals(nameList.get(0)) || userName.get(0).equals(nameList.get(1)) ||  userName.get(0).equals(nameList.get(2)) || userName.get(0).equals(nameList.get(3))){
             System.out.println("Good Luck!");
-        } else if (name != nameList.get(0)) {
+        } else if (!userName.get(0).equals(nameList.get(0)) || !userName.get(0).equals(nameList.get(1)) || !userName.get(0).equals(nameList.get(2)) || !userName.get(0).equals(nameList.get(3))) {
             System.out.println("Sorry your not name isn't on the list");
         }
     }
@@ -64,8 +72,10 @@ public class Main {
 
                 List<Integer> raffleNumber = new ArrayList<>();
                 Collections.addAll(raffleNumber, 563, 431, 191);
+                raffleNumber.add(generateTicket());
+                System.out.println(raffleNumber);
 
-                if (userRaffle == 563 || userRaffle == 431 || userRaffle == 191) {
+                if (userRaffle == 563 || userRaffle == 431 || userRaffle == 191 || userRaffle == generateTicket()) {
                     System.out.println("you have a valid ticket");
                     break;
                 } else if (userRaffle != 563 || userRaffle != 431 || userRaffle != 191) {
@@ -89,19 +99,20 @@ public class Main {
         System.out.println("your total will be: £" + price);
 
         System.out.println("What is your name: ");
-        String namelist2 = (Reader.readLine());
-
-        List <String> ticketNames = new ArrayList<>();
-        Collections.addAll(ticketNames,"");
-        ticketNames.add(namelist2);
-
-        System.out.println(namelist2);
-
-        int ticketNumber = random.nextInt(999-1)+1;
-        System.out.println("Here is your ticket number: " + ticketNumber);
+        namelist2 = (Reader.readLine());
 
 
 
-
+        System.out.println("Thank you, " + namelist2 + ":" );
+        for (int i = 0; i < ticketAmount; i++) {
+            ticketNumber = random.nextInt(999-1)+1;
+            System.out.println("Here is your ticket number: " + ticketNumber);
+        }
+    }
+    private static int generateTicket(){
+        return ticketNumber;
+    }
+    private static String generateName(){
+        return namelist2;
     }
 }
